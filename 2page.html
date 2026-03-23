@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle, #0d1b2a, #000);
+  overflow:hidden;
+  color:white;
+  text-align:center;
+}
+
+/* SECTION */
+.section {
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:20px;
+}
+.active { display:flex; }
+
+/* BUTTON */
+.btn {
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:white;
+  font-size:18px;
+  margin-top:20px;
+}
+
+/* PETALS */
+.petal {
+  position:absolute;
+  font-size:20px;
+  animation: fall 6s linear infinite;
+}
+@keyframes fall {
+  from { transform:translateY(-10vh) rotate(0deg); }
+  to { transform:translateY(110vh) rotate(360deg); opacity:0; }
+}
+
+/* SLIDESHOW */
+#slideshow img {
+  width:250px;
+  height:250px;
+  border-radius:20px;
+  position:absolute;
+  opacity:0;
+  transition:opacity 1s;
+}
+#slideshow img.active { opacity:1; }
+
+/* MESSAGE */
+#message {
+  max-width:90%;
+  font-size:18px;
+  line-height:1.6;
+  white-space:pre-line;
+}
+
+/* RING BOX */
+#ringBox {
+  width:120px;
+  height:80px;
+  background:#222;
+  border-radius:10px;
+  position:relative;
+  cursor:pointer;
+  margin-top:20px;
+}
+#lid {
+  width:120px;
+  height:40px;
+  background:#333;
+  position:absolute;
+  top:0;
+  transform-origin:top;
+  transition:transform 0.6s;
+}
+#ring {
+  font-size:40px;
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%) scale(0);
+  transition:0.5s;
+}
+.open #lid { transform:rotateX(120deg); }
+.open #ring { transform:translateX(-50%) scale(1.2); }
+
+/* FIREWORK */
+.firework {
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:gold;
+  border-radius:50%;
+  animation:explode 1s forwards;
+}
+@keyframes explode {
+  to {
+    transform:translate(var(--x), var(--y));
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="song.mp3">
+</audio>
+
+<!-- START -->
+<div class="section active" id="start">
+  <h1>Hiii Ovindii, I have something to know you, but please be kind to protect our friendship. ❤️</h1>
+  <p>seeeee!!!!! I made something special just for you...</p>
+  <button class="btn" onclick="startExperience()">Start</button>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="section" id="slideshowSection">
+  <h2>Usss 💕</h2>
+  <div id="slideshow">
+    <img src="25.jpg" class="active">
+    <img src="26.jpg">
+    <img src="27.jpg">
+  </div>
+</div>
+
+<!-- MESSAGE -->
+<div class="section" id="messageSection">
+  <h2>Just a little From My Heart 💌</h2>
+  <p id="message"></p>
+  <button class="btn" onclick="show('proposal')">click here to continue 💖</button>
+</div>
+
+<!-- PROPOSAL -->
+<div class="section" id="proposal">
+  <h2>heee I'm Sorryyy butt...</h2>
+
+  <div id="ringBox" onclick="openRing()">
+    <div id="lid"></div>
+    <div id="ring">💍</div>
+  </div>
+
+  <h1>Will you be my Princess? 💖</h1>
+
+  <button class="btn" onclick="yesClick()">Yes 💖</button>
+  <button class="btn" id="noBtn" onclick="noClick()">No 😢</button>
+
+  <h3 id="finalMsg"></h3>
+</div>
+
+<script>
+
+/* PETALS */
+setInterval(()=>{
+  let p=document.createElement("div");
+  p.className="petal";
+  p.innerHTML="🌹";
+  p.style.left=Math.random()*100+"%";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),6000);
+},300);
+
+/* NAV */
+function show(id){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* START */
+function startExperience(){
+  document.getElementById("music").play().catch(()=>{});
+  show("slideshowSection");
+  startSlideshow();
+}
+
+/* SLIDESHOW */
+let slideIndex=0;
+function startSlideshow(){
+  let slides=document.querySelectorAll("#slideshow img");
+
+  let slideInterval=setInterval(()=>{
+    slides[slideIndex].classList.remove("active");
+    slideIndex=(slideIndex+1)%slides.length;
+    slides[slideIndex].classList.add("active");
+  },2500);
+
+  setTimeout(()=>{
+    clearInterval(slideInterval);
+    show("messageSection");
+    typeMessage();
+  },8000);
+}
+
+/* LONG MESSAGE */
+let text = `From the moment you came into my life, everything changed...
+
+You brought happiness I never knew I needed,
+and love I never thought I deserved 💖
+
+Every smile of yours brightens my darkest days,
+every word from you feels like home ✨
+
+I don’t just love you for who you are,
+but for how I become a better person when I'm with you.
+
+You are my peace, my happiness, my everything...
+
+And today, with all my heart,
+I want to ask you something very special... 💍`;
+
+let i=0;
+function typeMessage(){
+  if(i<text.length){
+    document.getElementById("message").innerHTML += text[i++];
+    setTimeout(typeMessage,35);
+  }
+}
+
+/* RING */
+function openRing(){
+  document.getElementById("ringBox").classList.toggle("open");
+}
+
+/* YES */
+function yesClick(){
+  document.getElementById("finalMsg").innerText="You just made me the happiest person alive 💖";
+
+  for(let i=0;i<100;i++){
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left="50%";
+    f.style.top="50%";
+    f.style.setProperty('--x',(Math.random()*400-200)+"px");
+    f.style.setProperty('--y',(Math.random()*400-200)+"px");
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
+}
+
+/* NO ESCAPE 😏 */
+function noClick(){
+  let btn=document.getElementById("noBtn");
+  btn.style.position="absolute";
+  btn.style.left=Math.random()*80+"%";
+  btn.style.top=Math.random()*80+"%";
+}
+
+</script>
+
+</body>
+</html>

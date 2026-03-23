@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    .hover-text {
+      color: purple;
+      transition: color 0.3s ease;
+    }
+    .hover-text:hover {
+      color: black;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 18th Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      text-align: center;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin: 20px;
+      text-shadow: 2px 2px 5px #ff69b4;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .message {
+      font-size: 1.2em;
+      margin: 20px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .stickers {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .sticker {
+      font-size: 3em;
+      margin: 10px;
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .gallery img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Heart Catcher Game */
+    #gameCanvas {
+      background: #ffe4e1;
+      border: 2px solid #ff69b4;
+      margin: 20px auto;
+      display: block;
+    }
+
+    /* Memory Game */
+    .memory-game {
+      display: grid;
+      grid-template-columns: repeat(4, 70px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .card {
+      width: 70px;
+      height: 70px;
+      background: #ff69b4;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      cursor: pointer;
+      color: transparent;
+    }
+
+    .card.flipped {
+      background: #fff;
+      color: #ff69b4;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2em; }
+      .message { font-size: 1em; }
+      .sticker { font-size: 2em; }
+      .gallery img { width: 90px; height: 90px; }
+      .memory-game { grid-template-columns: repeat(4, 60px); }
+      .card { width: 60px; height: 60px; }
+    }
+  </style>
+
+<meta charset="UTF-8">
+  <title>Bubble Button</title>
+  <style>
+    .bubble-button {
+      background-color: #6ec6ff;   /* Light blue bubble color */
+      color: white;                /* Text color */
+      padding: 15px 30px;          /* Bubble size */
+      border: none;                /* No border */
+      border-radius: 50px;         /* Fully rounded bubble shape */
+      font-size: 18px;
+      font-family: 'Arial', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+      transition: transform 0.3s ease;
+      animation: float 3s ease-in-out infinite; /* Bubble floating animation */
+    }
+
+    .bubble-button:hover {
+      transform: scale(1.1);       /* Slightly bigger on hover */
+      background-color: #4db8ff;   /* Darker blue on hover */
+    }
+
+    /* Bubble floating animation */
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Happy 18th Birthday, OViiiyy 🎂</h1>
+  <div class="message">
+    Wishing you endless joy, laughter, and love on this special milestone.  
+    You make my world brighter every single day 💖
+  </div>
+
+  <div class="stickers">
+    <div class="sticker">🎂</div>
+    <div class="sticker">🎈</div>
+    <div class="sticker">💐</div>
+    <div class="sticker">🌸</div>
+    <div class="sticker">🕯️</div>
+  </div>
+
+  <h2>📸 Cuddly Kitty of Endless Joy</h2>
+  <div class="gallery">
+    <img src="1.jpg" alt="Memory 1">
+    <img src="2.jpg" alt="Memory 2">
+    <img src="3.jpg" alt="Memory 3">
+    <img src="4.jpg" alt="Memory 4">
+  </div>
+
+  <h2>💌<br><p class="hover-text"> Considering your age, you are no longer a child
+<br> follow your dreams in the way you chase 18 in this game </p></h2>
+  <canvas id="gameCanvas" width="300" height="400"></canvas>
+
+  <h2>🧩 Memory Flip Game</h2>
+
+  <div class="memory-game" id="memoryGame"></div>
+<!-- Custom text inside the bubble button -->
+  <button class="bubble-button" onclick="window.location.href='2page.html'">
+    ⚠️ Think twice before click this
+  </button>
+
+</script>>
+
+  <script>
+    // Heart Catcher Game
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    let heartY = 0, score = 0;
+    function drawHeart(x, y) {
+      ctx.font = "30px Arial";
+      ctx.fillText("1️⃣8️", x, y);
+    }
+    function gameLoop() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      drawHeart(140, heartY);
+      heartY += 2;
+      if (heartY > canvas.height) {
+        heartY = 0;
+      }
+      ctx.font = "20px Arial";
+      ctx.fillText("Score: " + score, 10, 20);
+      requestAnimationFrame(gameLoop);
+    }
+    canvas.addEventListener("click", function(e){
+      if (e.offsetY > heartY-30 && e.offsetY < heartY+30) {
+        score++;
+        heartY = 0;
+      }
+    });
+    gameLoop();
+  // Memory Flip Game
+    const symbols = ["🎂","🎂","💝","💝","🎈","🎈","🌸","🌸"];
+    let shuffled = symbols.sort(() => 0.5 - Math.random());
+    const gameBoard = document.getElementById("memoryGame");
+    shuffled.forEach(sym => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.textContent = sym;
+      card.addEventListener("click", flipCard);
+      gameBoard.appendChild(card);
+    });
+    let firstCard = null;
+    function flipCard() {
+      if (this.classList.contains("flipped")) return;
+      this.classList.add("flipped");
+      if (!firstCard) {
+        firstCard = this;
+      } else {
+        if (firstCard.textContent === this.textContent) {
+          firstCard = null;
+        } else {
+          setTimeout(() => {
+            this.classList.remove("flipped");
+            firstCard.classList.remove("flipped");
+            firstCard = null;
+          }, 800);
+        }
+      }
+    }
+
+  </script>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+</body>
+</html>
